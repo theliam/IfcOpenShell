@@ -51,12 +51,12 @@ bool convert_back_units = false;
 bool use_faster_booleans = false;
 
 int IfcGeomObjects::IfcMesh::addvert(const gp_XYZ& p) {
-	const float X = convert_back_units ? (float) (p.X() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (float)p.X();
-	const float Y = convert_back_units ? (float) (p.Y() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (float)p.Y();
-	const float Z = convert_back_units ? (float) (p.Z() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (float)p.Z();
+	const double X = convert_back_units ? (double) (p.X() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (double)p.X();
+	const double Y = convert_back_units ? (double) (p.Y() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (double)p.Y();
+	const double Z = convert_back_units ? (double) (p.Z() / IfcGeom::GetValue(IfcGeom::GV_LENGTH_UNIT)) : (double)p.Z();
 	int i = (int) verts.size() / 3;
 	if ( weld_vertices ) {
-		const VertKey key = VertKey(X,std::pair<float,float>(Y,Z));
+		const VertKey key = VertKey(X,std::pair<double,double>(Y,Z));
 		VertKeyMap::const_iterator it = welds.find(key);
 		if ( it != welds.end() ) return it->second;
 		i = (int) welds.size();
@@ -148,9 +148,9 @@ IfcGeomObjects::IfcMesh::IfcMesh(int i, const IfcGeom::ShapeList& shapes) {
 						gp_Vec normal_direction;
 						prop.Normal(uv.X(),uv.Y(),p,normal_direction);						
 						gp_Dir normal = gp_Dir(normal_direction.XYZ() * rotation_matrix);
-						normals.push_back((float)normal.X());
-						normals.push_back((float)normal.Y());
-						normals.push_back((float)normal.Z());
+						normals.push_back((double)normal.X());
+						normals.push_back((double)normal.Y());
+						normals.push_back((double)normal.Z());
 					}
 				}
 
@@ -170,9 +170,9 @@ IfcGeomObjects::IfcMesh::IfcMesh(int i, const IfcGeom::ShapeList& shapes) {
 					const gp_XYZ v1 = pt2-pt1;
 					const gp_XYZ v2 = pt3-pt2;
 					gp_Dir normal = gp_Dir(v1^v2);
-					normals.push_back((float)normal.X());
-					normals.push_back((float)normal.Y());
-					normals.push_back((float)normal.Z());
+					normals.push_back((double)normal.X());
+					normals.push_back((double)normal.Y());
+					normals.push_back((double)normal.Z());
 					*/
 
 					faces.push_back(dict[n1]);
@@ -201,7 +201,7 @@ IfcGeomObjects::IfcObject::IfcObject(int my_id,
 	// Convert the gp_Trsf into a 4x3 Matrix
 	for( int i = 1; i < 5; ++ i )
 		for ( int j = 1; j < 4; ++ j )
-			matrix.push_back((float)trsf.Value(j,i));
+			matrix.push_back((double)trsf.Value(j,i));
 
 	id = my_id;
 	parent_id = p_id;

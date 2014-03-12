@@ -86,13 +86,13 @@ int main ( int argc, char** argv ) {
 			const double x = *(it++);
 			const double y = *(it++);
 			const double z = *(it++);
-			fObj << "v " << x << " " << y << " " << z << std::endl;
+			fObj << "v " << std::fixed << std::setprecision(8) << x << " " << std::fixed << std::setprecision(8) << y << " " << std::fixed << std::setprecision(8) << z << std::endl;
 		}
 		for ( IfcGeomObjects::FltIt it = o->mesh->normals.begin(); it != o->mesh->normals.end(); ) {
 			const double x = *(it++);
 			const double y = *(it++);
 			const double z = *(it++);
-			fObj << "vn " << x << " " << y << " " << z << std::endl;
+			fObj << "vn " << std::fixed << std::setprecision(8) << x << " " << std::fixed << std::setprecision(8) << y << " " << std::fixed << std::setprecision(8) << z << std::endl;
 		}
 		for ( IfcGeomObjects::IntIt it = o->mesh->faces.begin(); it != o->mesh->faces.end(); ) {
 			const int v1 = *(it++)+vcount_total;
