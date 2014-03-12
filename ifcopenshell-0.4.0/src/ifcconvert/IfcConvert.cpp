@@ -61,12 +61,12 @@ void printUsage(const boost::program_options::options_description& generic_optio
 }
 
 std::string change_extension(const std::string& fn, const std::string& ext) {
-	std::string::size_type dot = fn.find_last_of('.');
-	if (dot != std::string::npos) {
-		return fn.substr(0,dot+1) + ext;
-	} else {
+	//std::string::size_type dot = fn.find_last_of('.');
+	//if (dot != std::string::npos) {
+	//	return fn.substr(0,dot+1) + ext;
+	//} else {
 		return fn + "." + ext;
-	}
+	//}
 }
 
 static std::stringstream log_stream;
